@@ -2,6 +2,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+
 }
 
 .calculator {
@@ -44,11 +45,11 @@
 
 
 .buttons {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  
+  justify-content: center; 
 }
 
 #missing,
@@ -82,4 +83,10 @@
 }
 #normal-red {
   background-color: rgb(155, 84, 84);
+}
+
+#small:hover,
+#normal-red:hover,
+#normal:hover {
+  filter: brightness(2) invert(80%)
 }
