@@ -3,7 +3,7 @@ import './App.css';
 import buttons from './components/buttonArray'
 import parse from 'html-react-parser'
 import { useState } from 'react';
-import { evaluate,match, sqrt, log10, format } from 'mathjs';
+import { evaluate, sqrt } from 'mathjs';
 
 import { square } from 'mathjs';
 
@@ -11,10 +11,9 @@ import { square } from 'mathjs';
 function App() {
   const [answer, setAnswer] = useState("0");
   const [runningSum, setRunningSum] = useState("");
-  const [lastFunc, setLastFunc] = useState("");
   const parseInput = (funcs) => {
 
-    let t = 0;
+
     let lastnum = 0;
     switch (funcs) {
       case "AC":
@@ -41,9 +40,9 @@ function App() {
         let running =  runningSum;
         
         console.log(running,runningSum,)
-        lastnum = running.match(/[\d\.]+(?!.[\.*\d])/);
+        lastnum = running.match(/[\d.]+(?!.[.*\d])/);
         console.log("ln",lastnum)
-        running=running.replace((/[\d\.]+(?!.*[\.\d])/), (-1*lastnum))
+        running=running.replace((/[\d.]+(?!.*[.\d])/), (-1*lastnum))
         running=running.replace('--','');
         setRunningSum(running)
         break;
@@ -74,33 +73,22 @@ function App() {
           setRunningSum(runningSum + funcs);
           break;
       case "&#x221A;":
-        lastnum = runningSum.match(/[\d\.]+(?!.[\.*\d])/)[0];
+        lastnum = runningSum.match(/[\d.]+(?!.[.*\d])/)[0];
         console.log(lastnum)
 
-        setRunningSum(runningSum.replace((/[\d\.]+(?!.*[\.\d])/), sqrt(lastnum)))
+        setRunningSum(runningSum.replace((/[\d.]+(?!.*[.\d])/), sqrt(lastnum)))
         break;
       case "x<sup>2</sup>":
-        lastnum = runningSum.match(/[\d\.]+(?!.[\.*\d])/)[0];
-        setRunningSum(runningSum.replace((/[\d\.]+(?!.*[\.\d])/), square(lastnum)))
+        lastnum = runningSum.match(/[\d.]+(?!.[.*\d])/)[0];
+        setRunningSum(runningSum.replace((/[\d.]+(?!.*[.\d])/), square(lastnum)))
         break;
 
-      case "x": funcs = "*"
-      case ".":
-      case "(":
-      case ")":
-      case "+":
-      case "-":
-      case "/":
-      case "1":
-      case "2":
-      case "3":
-      case "4":
-      case "5":
-      case "6":
-      case "7":
-      case "8":
-      case "9":
-      case "0": setRunningSum(runningSum + funcs);
+      case "x": funcs = "*";
+      setRunningSum(runningSum + funcs);
+    break
+      
+      default: setRunningSum(runningSum + funcs);
+        break;
     }
 
 
